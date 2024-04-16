@@ -45,8 +45,13 @@ spec:
         startupProbe: {{ $.Values.teamcity.startupProbe | toJson }}
         livenessProbe: {{ $.Values.teamcity.livenessProbe | toJson }}
         readinessProbe: {{ $.Values.teamcity.readinessProbe | toJson }}
+        if {{ $.Values.teamcity.lifecycle }}
+        lifecycle: {{ $.Values.teamcity.lifecycle | toJson }}
+        {{- end }}
         ports: {{ $.Values.teamcity.ports | toJson}}
         resources: {{ $.Values.teamcity.resources | toJson }}
+        {{ if $.Values.lifecycle }}
+        {{- end }}
         volumeMounts:
         - mountPath: /data/teamcity_server/datadir
           name: teamcity-server-data
